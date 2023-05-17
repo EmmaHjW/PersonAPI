@@ -11,7 +11,7 @@ namespace PersonAPI.Repositories
         {
             using (var db = new ApplicationDbContext())
             {
-                return await db.Interests.ToListAsync();
+                return await db.Interests.Include(i => i.Links).ToListAsync();
             }
         }
         internal async static Task<Interest> GetInterestByIdAsync(int interestId)

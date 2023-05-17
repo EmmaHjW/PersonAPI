@@ -1,5 +1,8 @@
 
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using PersonAPI.Data;
 using PersonAPI.Models;
 using PersonAPI.Repositories;
 
@@ -155,6 +158,9 @@ namespace PersonAPI
             }).WithTags("Interest Endpoint");
 
             //Link start
+            app.MapGet("/get-all-links", async () => await LinkRepositories.GetInterestAsync())
+            .WithTags("Link Endpoint");
+
             app.MapPost(pattern: "/create-link", handler: async (Link linkToCreate) =>
             {
                 bool createSuccess = await LinkRepositories.CreateLinkAsync(linkToCreate);
